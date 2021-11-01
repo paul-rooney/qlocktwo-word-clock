@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Barlow:500&display=swap" rel="stylesheet">
     <style media="screen">
-      body {
+      .body {
         background: #000000;
         background: -webkit-linear-gradient(to bottom right, #1d1d1d, #000000);
         background: linear-gradient(to bottom right, #1d1d1d, #000000);
@@ -21,7 +21,7 @@
         width: calc(100vh - 16px);
       }
 
-      div > div {
+      .grid__item {
         align-items: center;
         color: #0d0d0d;
         display: flex;
@@ -29,7 +29,7 @@
         position: relative;
       }
 
-      p {
+      .grid__letter {
         font-family:
           'Futura',
           'Barlow',
@@ -42,7 +42,7 @@
         text-transform: uppercase;
       }
 
-      div:not(.lit) {
+      .grid__item:not(.lit) {
         text-shadow:
           0 1px 0 hsla(0, 0%, 100%, .1),
           0 -1px 0 hsla(0, 0%, 0%, 1);
@@ -81,94 +81,86 @@
       }
     </style>
   </head>
-  <body>
+  <body class="body">
     <div class="grid"></div>
     <script>
     (function() {
-      const letters = 'itlisastimeacquarterdctwentyfivexhalfbtenftopasterunineonesixthreefourfivetwoeightelevenseventwelvetenseoclock';
-      const lettersArray = letters.split('');
+      const letters = ['i', 't', 'l', 'i', 's', 'a', 's', 't', 'i', 'm', 'e', 'a', 'c', 'q', 'u', 'a', 'r', 't', 'e', 'r', 'd', 'c', 't', 'w', 'e', 'n', 't', 'y', 'f', 'i', 'v', 'e', 'x', 'h', 'a', 'l', 'f', 'b', 't', 'e', 'n', 'f', 't', 'o', 'p', 'a', 's', 't', 'e', 'r', 'u', 'n', 'i', 'n', 'e', 'o', 'n', 'e', 's', 'i', 'x', 't', 'h', 'r', 'e', 'e', 'f', 'o', 'u', 'r', 'f', 'i', 'v', 'e', 't', 'w', 'o', 'e', 'i', 'g', 'h', 't', 'e', 'l', 'e', 'v', 'e', 'n', 's', 'e', 'v', 'e', 'n', 't', 'w', 'e', 'l', 'v', 'e', 't', 'e', 'n', 's', 'e', 'o', 'c', 'l', 'o', 'c', 'k'];
       const grid = document.querySelector('.grid');
 
-      let i = 0;
-
-      lettersArray.forEach(letter => {
+      letters.forEach((letter, i) => {
         const div = document.createElement('div');
 
-        if (i >= 0 && i <= 1) addClass(div, 'it');
-        if (i >= 3 && i <= 4) addClass(div, 'is');
-        if (i >= 13 && i <= 19) addClass(div, 'quarter');
-        if (i >= 22 && i <= 27) addClass(div, 'twenty');
-        if (i >= 22 && i <= 31) addClass(div, 'twentyfive');
-        if (i >= 28 && i <= 31) addClass(div, 'five--m');
-        if (i >= 33 && i <= 36) addClass(div, 'half');
-        if (i >= 38 && i <= 40) addClass(div, 'ten--m');
-        if (i >= 42 && i <= 43) addClass(div, 'to');
-        if (i >= 44 && i <= 47) addClass(div, 'past');
-        if (i >= 51 && i <= 54) addClass(div, 'nine');
-        if (i >= 55 && i <= 57) addClass(div, 'one');
-        if (i >= 58 && i <= 60) addClass(div, 'six');
-        if (i >= 61 && i <= 65) addClass(div, 'three');
-        if (i >= 66 && i <= 69) addClass(div, 'four');
-        if (i >= 70 && i <= 73) addClass(div, 'five');
-        if (i >= 74 && i <= 76) addClass(div, 'two');
-        if (i >= 77 && i <= 81) addClass(div, 'eight');
-        if (i >= 82 && i <= 87) addClass(div, 'eleven');
-        if (i >= 88 && i <= 92) addClass(div, 'seven');
-        if (i >= 93 && i <= 98) addClass(div, 'twelve');
-        if (i >= 99 && i <= 101) addClass(div, 'ten');
-        if (i >= 104 && i <= 109) addClass(div, 'oclock');
+        if (i >=  00 && i <=  01) div.classList.add('it');
+        if (i >=  03 && i <=  04) div.classList.add('is');
+        if (i >=  13 && i <=  19) div.classList.add('quarter');
+        if (i >=  22 && i <=  27) div.classList.add('twenty');
+        if (i >=  22 && i <=  31) div.classList.add('twentyfive');
+        if (i >=  28 && i <=  31) div.classList.add('five--m');
+        if (i >=  33 && i <=  36) div.classList.add('half');
+        if (i >=  38 && i <=  40) div.classList.add('ten--m');
+        if (i >=  42 && i <=  43) div.classList.add('to');
+        if (i >=  44 && i <=  47) div.classList.add('past');
+        if (i >=  51 && i <=  54) div.classList.add('nine');
+        if (i >=  55 && i <=  57) div.classList.add('one');
+        if (i >=  58 && i <=  60) div.classList.add('six');
+        if (i >=  61 && i <=  65) div.classList.add('three');
+        if (i >=  66 && i <=  69) div.classList.add('four');
+        if (i >=  70 && i <=  73) div.classList.add('five');
+        if (i >=  74 && i <=  76) div.classList.add('two');
+        if (i >=  77 && i <=  81) div.classList.add('eight');
+        if (i >=  82 && i <=  87) div.classList.add('eleven');
+        if (i >=  88 && i <=  92) div.classList.add('seven');
+        if (i >=  93 && i <=  98) div.classList.add('twelve');
+        if (i >=  99 && i <= 101) div.classList.add('ten');
+        if (i >= 104 && i <= 109) div.classList.add('oclock');
 
-        div.innerHTML = `<p>${letter}</p>`;
+        div.classList.add('grid__item');
+        div.innerHTML = `<p class="grid__letter">${letter}</p>`;
         grid.appendChild(div);
-
-        i++;
       });
-
-      function addClass(el, className) {
-        el.classList.add(className);
-      }
 
       function runClock() {
         let time,
-        hours,
-        minutes;
+            minutes,
+            hours;
 
         if (minutes % 5 === 0) {
-          Array.from(grid.querySelectorAll('div')).forEach(letter => letter.classList.remove('lit'));
+          grid
+            .querySelectorAll('.grid__item')
+            .forEach(item => item.classList.remove('lit'));
         }
 
         function lightWord(className) {
-          let nodeList = document.querySelectorAll(className);
-          let newArray = Array.from(nodeList);
-          newArray.forEach(item => item.classList.add('lit'))
+          grid
+            .querySelectorAll(className)
+            .forEach(item => item.classList.add('lit'));
         }
-        setInterval(function () {
+
+        setInterval(() => {
           time = new Date();
-          hours = time.getHours();
           minutes = time.getMinutes();
+          hours = minutes >= 35 ? time.getHours() + 1 : time.getHours();
 
-          if (minutes >= 35) {
-            hours = time.getHours() + 1;
-          }
+          grid
+            .querySelectorAll('div')
+            .forEach(letter => letter.classList.remove('lit'));
 
-          Array.from(grid.querySelectorAll('div')).forEach(letter => letter.classList.remove('lit'));
-
-
-          if (hours === 1  || hours === 13) lightWord('.one');
-          if (hours === 2  || hours === 14) lightWord('.two');
-          if (hours === 3  || hours === 15) lightWord('.three');
-          if (hours === 4  || hours === 16) lightWord('.four');
-          if (hours === 5  || hours === 17) lightWord('.five');
-          if (hours === 6  || hours === 18) lightWord('.six');
-          if (hours === 7  || hours === 19) lightWord('.seven');
-          if (hours === 8  || hours === 20) lightWord('.eight');
-          if (hours === 9  || hours === 21) lightWord('.nine');
+          if (hours === 01 || hours === 13) lightWord('.one');
+          if (hours === 02 || hours === 14) lightWord('.two');
+          if (hours === 03 || hours === 15) lightWord('.three');
+          if (hours === 04 || hours === 16) lightWord('.four');
+          if (hours === 05 || hours === 17) lightWord('.five');
+          if (hours === 06 || hours === 18) lightWord('.six');
+          if (hours === 07 || hours === 19) lightWord('.seven');
+          if (hours === 08 || hours === 20) lightWord('.eight');
+          if (hours === 09 || hours === 21) lightWord('.nine');
           if (hours === 10 || hours === 22) lightWord('.ten');
           if (hours === 11 || hours === 23) lightWord('.eleven');
           if (hours === 12 || hours === 00) lightWord('.twelve');
 
-          if (minutes >= 0 && minutes < 5) lightWord('.it, .is, .oclock');
-          if (minutes >= 5 && minutes < 10) lightWord('.five--m, .past');
+          if (minutes >= 00 && minutes < 05) lightWord('.it, .is, .oclock');
+          if (minutes >= 05 && minutes < 10) lightWord('.five--m, .past');
           if (minutes >= 10 && minutes < 15) lightWord('.ten--m, .past');
           if (minutes >= 15 && minutes < 20) lightWord('.quarter, .past');
           if (minutes >= 20 && minutes < 25) lightWord('.twenty, .past');
