@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Word clock</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Barlow:500&display=swap" rel="stylesheet">
-    <style media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      @font-face {
+        font-family: 'Porpora';
+        src: url('./assets/Porpora-Regular.woff2') format('woff2'),
+             url('./assets/Porpora-Regular.woff') format('woff');
+      }
+
+      :root {
+        --lit:
+          0px  0px   8px hsla(0, 0%, 100%, 1),
+          0px  0px  16px hsla(0, 0%, 100%, .7),
+          0px  0px  32px hsla(0, 0%, 100%, .8),
+          0px  0px  64px hsla(0, 0%, 100%, .9),
+          0px  0px 128px hsla(0, 0%, 100%, 1),
+          0px  0px 256px hsla(0, 0%, 100%, 1),
+          0px  1px   0px hsla(0, 0%, 0%, 1),
+          0px -1px   0px hsla(0, 0%, 100%, .4);
+        --unlit:
+          0 -1px 0 hsla(0, 0%, 0%, 1),
+          0  1px 0 hsla(0, 0%, 100%, .1);
+      }
+
       .body {
         background: #000000;
         background: -webkit-linear-gradient(to bottom right, #1d1d1d, #000000);
@@ -30,10 +50,7 @@
       }
 
       .grid__letter {
-        font-family:
-          'Futura',
-          'Barlow',
-          sans-serif;
+        font-family: 'Porpora', sans-serif;
         font-size: 32px;
         font-weight: 500;
         line-height: 1;
@@ -43,40 +60,27 @@
       }
 
       .grid__item:not(.lit) {
-        text-shadow:
-          0 1px 0 hsla(0, 0%, 100%, .1),
-          0 -1px 0 hsla(0, 0%, 0%, 1);
+        text-shadow: var(--unlit);
       }
 
       .lit {
-        color: #ffffff;
+        color: hsla(60 72.5% 87.5% / 1);
         animation-name: flicker;
-        animation-duration: 125ms;
-        animation-iteration-count: 1;
+        animation-duration: 20s;
+        animation-iteration-count: infinite;
         animation-timing-function: linear;
-        text-shadow:
-          0 0 8px hsla(0, 0%, 100%, 1),
-          0 0 16px hsla(0, 0%, 100%, .4),
-          0 0 32px hsla(0, 0%, 100%, .6),
-          0 0 64px hsla(0, 0%, 100%, .8),
-          0 0 128px hsla(0, 0%, 100%, 1),
-          0 1px 0 hsla(0, 0%, 0%, 1),
-          0 -1px 0 hsla(0, 0%, 100%, .4);
+        text-shadow: var(--lit);
       }
 
       @keyframes flicker {
-        from {
-          text-shadow:
-            0 0 8px hsla(0, 0%, 100%, 1),
-            0 0 16px hsla(0, 0%, 100%, .4),
-            0 0 32px hsla(0, 0%, 100%, .6),
-            0 0 64px hsla(0, 0%, 100%, .8),
-            0 0 128px hsla(0, 0%, 100%, 1),
-            0 1px 0 hsla(0, 0%, 0%, 1),
-            0 -1px 0 hsla(0, 0%, 100%, .4);
+        0% {
+          text-shadow: var(--lit);
         }
-        to {
-          text-shadow: none;
+        .125% {
+          text-shadow: var(--unlit);
+        }
+        .25% {
+          text-shadow: var(--lit);
         }
       }
     </style>
@@ -84,35 +88,146 @@
   <body class="body">
     <div class="grid"></div>
     <script>
-    (function() {
-      const letters = ['i', 't', 'l', 'i', 's', 'a', 's', 't', 'i', 'm', 'e', 'a', 'c', 'q', 'u', 'a', 'r', 't', 'e', 'r', 'd', 'c', 't', 'w', 'e', 'n', 't', 'y', 'f', 'i', 'v', 'e', 'x', 'h', 'a', 'l', 'f', 'b', 't', 'e', 'n', 'f', 't', 'o', 'p', 'a', 's', 't', 'e', 'r', 'u', 'n', 'i', 'n', 'e', 'o', 'n', 'e', 's', 'i', 'x', 't', 'h', 'r', 'e', 'e', 'f', 'o', 'u', 'r', 'f', 'i', 'v', 'e', 't', 'w', 'o', 'e', 'i', 'g', 'h', 't', 'e', 'l', 'e', 'v', 'e', 'n', 's', 'e', 'v', 'e', 'n', 't', 'w', 'e', 'l', 'v', 'e', 't', 'e', 'n', 's', 'e', 'o', 'c', 'l', 'o', 'c', 'k'];
+    (function () {
       const grid = document.querySelector('.grid');
+      const letters = [
+        'i',
+        't',
+        'l',
+        'i',
+        's',
+        'a',
+        's',
+        't',
+        'i',
+        'm',
+        'e',
+        'a',
+        'c',
+        'q',
+        'u',
+        'a',
+        'r',
+        't',
+        'e',
+        'r',
+        'd',
+        'c',
+        't',
+        'w',
+        'e',
+        'n',
+        't',
+        'y',
+        'f',
+        'i',
+        'v',
+        'e',
+        'x',
+        'h',
+        'a',
+        'l',
+        'f',
+        'b',
+        't',
+        'e',
+        'n',
+        'f',
+        't',
+        'o',
+        'p',
+        'a',
+        's',
+        't',
+        'e',
+        'r',
+        'u',
+        'n',
+        'i',
+        'n',
+        'e',
+        'o',
+        'n',
+        'e',
+        's',
+        'i',
+        'x',
+        't',
+        'h',
+        'r',
+        'e',
+        'e',
+        'f',
+        'o',
+        'u',
+        'r',
+        'f',
+        'i',
+        'v',
+        'e',
+        't',
+        'w',
+        'o',
+        'e',
+        'i',
+        'g',
+        'h',
+        't',
+        'e',
+        'l',
+        'e',
+        'v',
+        'e',
+        'n',
+        's',
+        'e',
+        'v',
+        'e',
+        'n',
+        't',
+        'w',
+        'e',
+        'l',
+        'v',
+        'e',
+        't',
+        'e',
+        'n',
+        's',
+        'e',
+        'o',
+        'c',
+        'l',
+        'o',
+        'c',
+        'k',
+      ];
 
       letters.forEach((letter, i) => {
         const div = document.createElement('div');
 
-        if (i >=  00 && i <=  01) div.classList.add('it');
-        if (i >=  03 && i <=  04) div.classList.add('is');
-        if (i >=  13 && i <=  19) div.classList.add('quarter');
-        if (i >=  22 && i <=  27) div.classList.add('twenty');
-        if (i >=  22 && i <=  31) div.classList.add('twentyfive');
-        if (i >=  28 && i <=  31) div.classList.add('five--m');
-        if (i >=  33 && i <=  36) div.classList.add('half');
-        if (i >=  38 && i <=  40) div.classList.add('ten--m');
-        if (i >=  42 && i <=  43) div.classList.add('to');
-        if (i >=  44 && i <=  47) div.classList.add('past');
-        if (i >=  51 && i <=  54) div.classList.add('nine');
-        if (i >=  55 && i <=  57) div.classList.add('one');
-        if (i >=  58 && i <=  60) div.classList.add('six');
-        if (i >=  61 && i <=  65) div.classList.add('three');
-        if (i >=  66 && i <=  69) div.classList.add('four');
-        if (i >=  70 && i <=  73) div.classList.add('five');
-        if (i >=  74 && i <=  76) div.classList.add('two');
-        if (i >=  77 && i <=  81) div.classList.add('eight');
-        if (i >=  82 && i <=  87) div.classList.add('eleven');
-        if (i >=  88 && i <=  92) div.classList.add('seven');
-        if (i >=  93 && i <=  98) div.classList.add('twelve');
-        if (i >=  99 && i <= 101) div.classList.add('ten');
+        if (i >= 00 && i <= 01) div.classList.add('it');
+        if (i >= 03 && i <= 04) div.classList.add('is');
+        if (i >= 13 && i <= 19) div.classList.add('quarter');
+        if (i >= 22 && i <= 27) div.classList.add('twenty');
+        if (i >= 22 && i <= 31) div.classList.add('twentyfive');
+        if (i >= 28 && i <= 31) div.classList.add('five--m');
+        if (i >= 33 && i <= 36) div.classList.add('half');
+        if (i >= 38 && i <= 40) div.classList.add('ten--m');
+        if (i >= 42 && i <= 43) div.classList.add('to');
+        if (i >= 44 && i <= 47) div.classList.add('past');
+        if (i >= 51 && i <= 54) div.classList.add('nine');
+        if (i >= 55 && i <= 57) div.classList.add('one');
+        if (i >= 58 && i <= 60) div.classList.add('six');
+        if (i >= 61 && i <= 65) div.classList.add('three');
+        if (i >= 66 && i <= 69) div.classList.add('four');
+        if (i >= 70 && i <= 73) div.classList.add('five');
+        if (i >= 74 && i <= 76) div.classList.add('two');
+        if (i >= 77 && i <= 81) div.classList.add('eight');
+        if (i >= 82 && i <= 87) div.classList.add('eleven');
+        if (i >= 88 && i <= 92) div.classList.add('seven');
+        if (i >= 93 && i <= 98) div.classList.add('twelve');
+        if (i >= 99 && i <= 101) div.classList.add('ten');
         if (i >= 104 && i <= 109) div.classList.add('oclock');
 
         div.classList.add('grid__item');
@@ -120,31 +235,19 @@
         grid.appendChild(div);
       });
 
-      function runClock() {
-        let time,
-            minutes,
-            hours;
+      const runClock = () => {
+        let time, minutes, hours;
 
-        if (minutes % 5 === 0) {
-          grid
-            .querySelectorAll('.grid__item')
-            .forEach(item => item.classList.remove('lit'));
-        }
+        const lightWord = (className) => {
+          grid.querySelectorAll(className).forEach((item) => item.classList.add('lit'));
+        };
 
-        function lightWord(className) {
-          grid
-            .querySelectorAll(className)
-            .forEach(item => item.classList.add('lit'));
-        }
-
-        setInterval(() => {
+        const timer = setInterval(() => {
           time = new Date();
           minutes = time.getMinutes();
           hours = minutes >= 35 ? time.getHours() + 1 : time.getHours();
 
-          grid
-            .querySelectorAll('div')
-            .forEach(letter => letter.classList.remove('lit'));
+          grid.querySelectorAll('.grid__item').forEach((item) => item.classList.remove('lit'));
 
           if (hours === 01 || hours === 13) lightWord('.one');
           if (hours === 02 || hours === 14) lightWord('.two');
@@ -172,12 +275,10 @@
           if (minutes >= 50 && minutes < 55) lightWord('.ten--m, .to');
           if (minutes >= 55 && minutes < 60) lightWord('.five--m, .to');
         }, 1000);
-
-      }
+      };
 
       runClock();
-
-    }());
+    })();
     </script>
   </body>
 </html>
