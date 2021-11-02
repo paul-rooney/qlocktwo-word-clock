@@ -4,13 +4,10 @@
     <meta charset="utf-8" />
     <title>Word clock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
     <style>
-      @font-face {
-        font-family: 'Porpora';
-        src: url('./assets/Porpora-Regular.woff2') format('woff2'),
-             url('./assets/Porpora-Regular.woff') format('woff');
-      }
-
       :root {
         --lit:
           0px  0px   8px hsla(0, 0%, 100%, 1),
@@ -39,6 +36,7 @@
         height: calc(100vh - 16px);
         margin: 0 auto;
         width: calc(100vh - 16px);
+        max-width: 100vh;
       }
 
       .grid__item {
@@ -50,7 +48,7 @@
       }
 
       .grid__letter {
-        font-family: 'Porpora', sans-serif;
+        font-family: 'Josefin Sans', sans-serif;
         font-size: 32px;
         font-weight: 500;
         line-height: 1;
@@ -64,11 +62,12 @@
       }
 
       .lit {
-        color: hsla(60 72.5% 87.5% / 1);
         animation-name: flicker;
         animation-duration: 20s;
         animation-iteration-count: infinite;
         animation-timing-function: linear;
+        color: hsla(60 72.5% 87.5% / 1);
+        filter: drop-shadow(0px 0px 128px hsla(60 40% 60% / .8));
         text-shadow: var(--lit);
       }
 
